@@ -22,9 +22,27 @@ const ibmPlexMono = IBM_Plex_Mono({
   subsets: ["latin"],
 });
 
+const SITE_DESCRIPTION =
+  "Senior Azure Cloud Integrations Engineer at Microsoft. Orchestration, agent workflows, and integration architecture for enterprise customers.";
+
 export const metadata: Metadata = {
-  title: "Duan Walker",
-  description: "Cloud Solution Architect (AI) — Duan Walker",
+  metadataBase: new URL("https://duanwalker.dev"),
+  title: {
+    template: "%s · Duan Walker",
+    default: "Duan Walker — AI Systems on Azure",
+  },
+  description: SITE_DESCRIPTION,
+  openGraph: {
+    type: "website",
+    siteName: "Duan Walker",
+    url: "https://duanwalker.dev",
+    title: "Duan Walker — AI Systems on Azure",
+    description: SITE_DESCRIPTION,
+    images: ["/og.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
 };
 
 export default function RootLayout({

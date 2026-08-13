@@ -23,8 +23,16 @@ export async function generateMetadata({
   if (!project) return {};
 
   return {
-    title: `${project.title} — Duan Walker`,
+    title: project.title,
     description: project.tagline,
+    openGraph: {
+      type: "website",
+      siteName: "Duan Walker",
+      url: `https://duanwalker.dev/projects/${slug}`,
+      title: project.title,
+      description: project.tagline,
+      images: ["/og.png"],
+    },
   };
 }
 
