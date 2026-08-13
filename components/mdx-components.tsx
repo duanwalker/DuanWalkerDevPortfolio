@@ -1,6 +1,8 @@
 import type { MDXComponents } from "mdx/types";
+import { FlowScribeDemo } from "./flowscribe-demo";
 
 export const mdxComponents: MDXComponents = {
+  FlowScribeDemo,
   h2: (props) => <h2 className="mt-10 font-display text-h3 text-mist first:mt-0" {...props} />,
   h3: (props) => <h3 className="mt-8 font-display text-body-lg text-mist" {...props} />,
   p: (props) => <p className="mt-4 text-body-lg leading-relaxed text-lilac" {...props} />,

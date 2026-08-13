@@ -20,3 +20,7 @@ Logic App definitions are stored as JSON, but documenting what one actually does
 ## Architecture
 
 A Razor Pages application, written in C#, that reads a Logic App JSON definition and generates the documentation directly from it.
+
+Documentation generation itself is AI-driven: FlowScribe sends the parsed Logic App structure to Anthropic's Claude via the Messages API, which writes the prose description and produces the Microsoft-style write-up shown below. Parsing and orchestration stay in C#; Claude is the layer that turns structure into readable documentation.
+
+<FlowScribeDemo />
