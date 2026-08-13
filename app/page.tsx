@@ -51,12 +51,22 @@ export default function Home() {
 
       <section className="flex flex-col gap-4">
         <h2 className="font-display text-h2 text-mist">Contact</h2>
-        <a
-          href="mailto:duan.walker.dev@gmail.com"
-          className="w-fit font-mono text-mono text-pulse hover:text-mist"
-        >
-          duan.walker.dev@gmail.com
-        </a>
+        <div className="flex flex-col gap-2">
+          <a
+            href="mailto:duan.walker.dev@gmail.com"
+            className="w-fit font-mono text-mono text-pulse hover:text-mist"
+          >
+            duan.walker.dev@gmail.com
+          </a>
+          <a
+            href="/resume/DuanWalkerResume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-fit font-mono text-mono text-pulse hover:text-mist"
+          >
+            Resume (PDF)
+          </a>
+        </div>
       </section>
     </div>
   );
