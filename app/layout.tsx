@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Sora, Source_Sans_3, IBM_Plex_Mono } from "next/font/google";
 import { SiteHeader } from "@/components/site-header";
-import { SiteFooter } from "@/components/site-footer";
+import { Footer } from "@/components/footer";
 import "./globals.css";
 
 const sora = Sora({
@@ -40,7 +40,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-depth text-mist font-body">
         <SiteHeader />
         <main className="flex-1">{children}</main>
-        <SiteFooter />
+        <Footer />
       </body>
     </html>
   );
