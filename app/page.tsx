@@ -41,9 +41,11 @@ export default function Home() {
       <section className="flex flex-col gap-4">
         <h2 className="font-display text-h2 text-mist">About</h2>
         <p className="text-body-lg text-lilac">
-          Seven years at Microsoft building orchestration, agent workflows, and
-          integration architecture for enterprise customers — currently focused on
-          designing AI systems that run natively on Azure.
+          The pattern started early — as a kid I built a three-wheeled car by myself
+          with spare parts of old toys, and I&apos;ve been designing and assembling
+          systems end-to-end ever since. Seven years at Microsoft later, that means
+          orchestration, agent workflows, and integration architecture for enterprise
+          customers.
         </p>
       </section>
 
