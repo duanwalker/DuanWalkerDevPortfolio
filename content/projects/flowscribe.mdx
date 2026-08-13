@@ -24,3 +24,7 @@ A Razor Pages application, written in C#, that reads a Logic App JSON definition
 Documentation generation itself is AI-driven: FlowScribe sends the parsed Logic App structure to Anthropic's Claude via the Messages API, which writes the prose description and produces the Microsoft-style write-up shown below. Parsing and orchestration stay in C#; Claude is the layer that turns structure into readable documentation.
 
 <FlowScribeDemo />
+
+## What I'd do differently
+
+Separate business identity from day one. FlowScribe started on my personal email and API accounts, and untangling billing, keys, and account boundaries later cost real debugging time — including an auth failure that traced back to credentials split across two accounts. Infrastructure hygiene is a launch-day decision, not a scale-day one.
