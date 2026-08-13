@@ -1,0 +1,32 @@
+---
+slug: alphabot
+title: AlphaBot
+tagline: AI-assisted trading platform with human-in-the-loop execution
+status: active
+year: 2026
+role: Sole architect and engineer
+stack: [react, nodejs, express, claude-api, azure-tables]
+integrations: [alpaca, polygon, alpha-vantage]
+repo: null
+demo: null
+thumbnail: /img/projects/alphabot.png
+diagram: /img/diagrams/alphabot-architecture.svg
+featured: true
+order: 1
+---
+
+## Problem
+
+Idea generation and research across income, hedge, growth, and passive strategies is time-intensive to do consistently by hand, and most automated trading tools remove the human from the decision loop entirely. AlphaBot is a research and decision-support tool, not a trading bot — it generates and ranks trade ideas, but every idea stops at a human approval gate before anything happens.
+
+## Constraints
+
+Every generated trade idea has to clear a human approval step before execution — no fully autonomous trading path. The system has to run in paper-trading mode throughout, and market data has to keep working when any single upstream provider degrades or rate-limits.
+
+## Architecture
+
+A React front end and a Node/Express backend sit on top of Azure Table Storage for persistence. A 14-strategy registry spans income, hedge, growth, and passive approaches. FinBERT handles upstream ranking and curation of candidate ideas; Claude API sits downstream as the authoritative sentiment scorer. Every generated idea passes through a human-in-the-loop approval gate, with paper-trading mode active throughout.
+
+## Decisions and tradeoffs
+
+The broker-agnostic adapter layer is the most architecturally legible decision in the project: a `BrokerInterface` with an Alpaca implementation and a Schwab stub, designed against an interface rather than a specific vendor. Second is the market-data provider fallback chain — Alpaca for live quotes, Polygon for fundamentals, Alpha Vantage as a rate-limited fallback — which exists specifically to keep the system functional when any one third-party provider degrades.

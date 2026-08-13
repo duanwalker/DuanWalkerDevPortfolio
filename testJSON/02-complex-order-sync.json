@@ -1,0 +1,196 @@
+{
+  "definition": {
+    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "$connections": {
+        "defaultValue": {},
+        "type": "Object"
+      },
+      "partnerApiBaseUrl": {
+        "defaultValue": "https://api.contoso-partner.example/v2",
+        "type": "String"
+      }
+    },
+    "triggers": {
+      "Every_15_minutes": {
+        "type": "Recurrence",
+        "recurrence": {
+          "frequency": "Minute",
+          "interval": 15,
+          "timeZone": "Eastern Standard Time"
+        }
+      }
+    },
+    "actions": {
+      "Initialize_failed_orders": {
+        "type": "InitializeVariable",
+        "runAfter": {},
+        "inputs": {
+          "variables": [
+            {
+              "name": "FailedOrders",
+              "type": "array",
+              "value": []
+            }
+          ]
+        }
+      },
+      "Get_pending_orders": {
+        "type": "ApiConnection",
+        "runAfter": {
+          "Initialize_failed_orders": ["Succeeded"]
+        },
+        "inputs": {
+          "host": {
+            "connection": {
+              "name": "@parameters('$connections')['sql']['connectionId']"
+            }
+          },
+          "method": "post",
+          "path": "/v2/datasets/@{encodeURIComponent('default')}/procedures/@{encodeURIComponent('[dbo].[usp_GetPendingOrders]')}",
+          "body": {
+            "batchSize": 100
+          }
+        },
+        "runtimeConfiguration": {
+          "staticResult": {
+            "staticResultOptions": "Disabled"
+          }
+        }
+      },
+      "Process_each_order": {
+        "type": "Foreach",
+        "foreach": "@body('Get_pending_orders')?['ResultSets']?['Table1']",
+        "runAfter": {
+          "Get_pending_orders": ["Succeeded"]
+        },
+        "runtimeConfiguration": {
+          "concurrency": {
+            "repetitions": 5
+          }
+        },
+        "actions": {
+          "Try_submit_to_partner": {
+            "type": "Scope",
+            "runAfter": {},
+            "actions": {
+              "Post_order_to_partner_API": {
+                "type": "Http",
+                "runAfter": {},
+                "inputs": {
+                  "method": "POST",
+                  "uri": "@{parameters('partnerApiBaseUrl')}/orders",
+                  "headers": {
+                    "Content-Type": "application/json"
+                  },
+                  "body": {
+                    "externalOrderId": "@items('Process_each_order')?['OrderId']",
+                    "lineItems": "@items('Process_each_order')?['LineItems']",
+                    "shipToPostalCode": "@items('Process_each_order')?['PostalCode']"
+                  },
+                  "retryPolicy": {
+                    "type": "exponential",
+                    "count": 4,
+                    "interval": "PT10S",
+                    "maximumInterval": "PT1H",
+                    "minimumInterval": "PT5S"
+                  }
+                }
+              },
+              "Mark_order_synced": {
+                "type": "ApiConnection",
+                "runAfter": {
+                  "Post_order_to_partner_API": ["Succeeded"]
+                },
+                "inputs": {
+                  "host": {
+                    "connection": {
+                      "name": "@parameters('$connections')['sql']['connectionId']"
+                    }
+                  },
+                  "method": "post",
+                  "path": "/v2/datasets/@{encodeURIComponent('default')}/procedures/@{encodeURIComponent('[dbo].[usp_MarkOrderSynced]')}",
+                  "body": {
+                    "orderId": "@items('Process_each_order')?['OrderId']",
+                    "partnerReference": "@body('Post_order_to_partner_API')?['reference']"
+                  }
+                }
+              }
+            }
+          },
+          "Catch_sync_failure": {
+            "type": "Scope",
+            "runAfter": {
+              "Try_submit_to_partner": ["Failed", "TimedOut"]
+            },
+            "actions": {
+              "Append_to_failed_orders": {
+                "type": "AppendToArrayVariable",
+                "runAfter": {},
+                "inputs": {
+                  "name": "FailedOrders",
+                  "value": {
+                    "orderId": "@items('Process_each_order')?['OrderId']",
+                    "error": "@result('Try_submit_to_partner')[0]?['error']?['message']"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "Any_failures": {
+        "type": "If",
+        "runAfter": {
+          "Process_each_order": ["Succeeded"]
+        },
+        "expression": {
+          "and": [
+            {
+              "greater": ["@length(variables('FailedOrders'))", 0]
+            }
+          ]
+        },
+        "actions": {
+          "Send_failure_digest": {
+            "type": "ApiConnection",
+            "runAfter": {},
+            "inputs": {
+              "host": {
+                "connection": {
+                  "name": "@parameters('$connections')['office365']['connectionId']"
+                }
+              },
+              "method": "post",
+              "path": "/v2/Mail",
+              "body": {
+                "To": "integrations-oncall@contoso.example",
+                "Subject": "Order sync: @{length(variables('FailedOrders'))} failure(s)",
+                "Body": "<p>The following orders failed to sync:</p><pre>@{json(variables('FailedOrders'))}</pre>",
+                "Importance": "High"
+              }
+            }
+          },
+          "Terminate_with_failure": {
+            "type": "Terminate",
+            "runAfter": {
+              "Send_failure_digest": ["Succeeded"]
+            },
+            "inputs": {
+              "runStatus": "Failed",
+              "runError": {
+                "code": "PartialSyncFailure",
+                "message": "One or more orders failed to sync to the partner API."
+              }
+            }
+          }
+        },
+        "else": {
+          "actions": {}
+        }
+      }
+    },
+    "outputs": {}
+  }
+}

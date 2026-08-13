@@ -1,0 +1,22 @@
+---
+slug: flowscribe
+title: FlowScribe.AI
+tagline: Parses Azure Logic App JSON definitions and generates Microsoft-style documentation of structure, triggers, and actions.
+status: in-development
+stack: [csharp, razor-pages]
+integrations: []
+repo: null
+demo: /projects/flowscribe#demo
+thumbnail: null
+diagram: null
+featured: true
+order: 3
+---
+
+## Problem
+
+Logic App definitions are stored as JSON, but documenting what one actually does — its triggers, its actions, how the pieces connect — is normally a manual write-up. FlowScribe.AI parses a Logic App JSON definition and generates Microsoft-style documentation of its structure, triggers, and actions.
+
+## Architecture
+
+A Razor Pages application, written in C#, that reads a Logic App JSON definition and generates the documentation directly from it.

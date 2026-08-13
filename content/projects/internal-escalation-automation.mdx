@@ -1,0 +1,36 @@
+---
+slug: internal-escalation-automation
+title: Internal Escalation Workflow Automation
+tagline: An internal escalation workflow with a human approval gate and automatic closure detection.
+status: internal
+stack: [copilot-studio, logic-apps]
+integrations: []
+repo: null
+demo: null
+thumbnail: null
+diagram: null
+featured: false
+order: 2
+---
+
+{/* DRAFT — requires manager review before publishing. See SPEC.md §7.1 and §11. Keep featured: false until cleared. */}
+
+## Problem
+
+A time-sensitive internal escalation path was fully manual: a human had to notice the trigger condition, assemble context from the case record, compose an outbound communication, then watch for a response to know whether the path could close. Every step was reliable only as long as someone remembered to do it.
+
+## Constraints
+
+Had to run entirely within approved internal tooling. Had to keep a human in the approval path. Had to detect closure conditions without polling anything it shouldn't.
+
+## Architecture
+
+A Copilot Studio agent as the intake and interaction surface, Logic Apps orchestrating state transitions between stages, and an inbox-monitoring trigger for reply detection and automatic closure.
+
+## Decisions and tradeoffs
+
+Copilot Studio over a custom front end because adoption depends on the tool living where users already are. Logic Apps over a function app because the workflow is long-running and stateful, and the visual definition is itself the documentation for the next engineer. Reply detection over manual closure because a workflow that needs a human to remember to close it inherits the original problem.
+
+## What I'd do differently
+
+Instrument stage transitions from day one. Retrofitting telemetry to answer "where do instances stall?" was harder than building it in.
