@@ -1,6 +1,13 @@
 import Image from "next/image";
 import { site } from "@/content/site/site";
-import { FOCUS_ON_DARK, GUTTER, OUTLINE_TO_PULSE } from "./styles";
+import { FOCUS_ON_DARK, GUTTER } from "./styles";
+
+/**
+ * Nav links: no border or outline; mouse-over and keyboard focus both fill
+ * with pulse. The fill doubles as the keyboard focus indicator.
+ */
+const NAV_LINK =
+  "inline-flex min-h-11 items-center rounded-lg text-nav-link-on-dark outline-none hover:bg-pulse hover:text-depth focus-visible:bg-pulse focus-visible:text-depth motion-safe:transition-colors motion-safe:duration-150";
 
 /**
  * Sticky site bar. Must render as a direct child of the page-level wrapper,
@@ -27,20 +34,13 @@ export function TopBar() {
           />
           <span>{site.name}</span>
         </a>
-        <div className="flex flex-wrap items-center gap-x-4 text-[15px] lg:gap-x-[22px]">
+        <div className="flex flex-wrap items-center text-[15px] sm:gap-x-1 lg:gap-x-1.5">
           {site.nav.map((item) => (
-            <a
-              key={item.id}
-              href={`#${item.id}`}
-              className={`inline-flex min-h-11 items-center rounded text-nav-link-on-dark transition-colors hover:text-white ${FOCUS_ON_DARK}`}
-            >
+            <a key={item.id} href={`#${item.id}`} className={`${NAV_LINK} px-2 sm:px-3`}>
               {item.label}
             </a>
           ))}
-          <a
-            href="#contact"
-            className={`inline-flex min-h-11 items-center rounded-lg px-[18px] font-semibold text-nav-link-on-dark ${OUTLINE_TO_PULSE} ${FOCUS_ON_DARK}`}
-          >
+          <a href="#contact" className={`${NAV_LINK} px-3 font-semibold sm:px-[18px]`}>
             Contact
           </a>
         </div>
