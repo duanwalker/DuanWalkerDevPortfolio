@@ -1,7 +1,7 @@
 import { site } from "@/content/site/site";
 import { DocumentIcon, GitHubIcon, LinkedInIcon, MailIcon } from "./icons";
 import { Section, SectionHeading } from "./section";
-import { FOCUS_ON_DARK, GUTTER } from "./styles";
+import { FOCUS_ON_DARK, GUTTER, OUTLINE_TO_PULSE } from "./styles";
 
 const LINK = "flex min-h-11 items-center gap-3.5 rounded-[10px] py-2.5 pr-5 pl-3";
 const LINK_OUTLINED = `${LINK} border border-border-on-dark text-text-on-dark transition-colors hover:border-pulse ${FOCUS_ON_DARK}`;
@@ -38,9 +38,12 @@ export function Contact() {
         <li>
           <a
             href={site.resumePath}
-            className={`${LINK} bg-pulse font-semibold text-depth ${FOCUS_ON_DARK}`}
+            className={`group ${LINK} text-text-on-dark ${OUTLINE_TO_PULSE} ${FOCUS_ON_DARK}`}
           >
-            <span aria-hidden="true" className={`${ICON_CIRCLE} bg-depth text-pulse`}>
+            <span
+              aria-hidden="true"
+              className={`${ICON_CIRCLE} bg-pulse text-depth group-hover:bg-depth group-hover:text-pulse group-focus-visible:bg-depth group-focus-visible:text-pulse motion-safe:transition-colors motion-safe:duration-150`}
+            >
               <DocumentIcon size={20} />
             </span>
             <span>Download resume (PDF)</span>

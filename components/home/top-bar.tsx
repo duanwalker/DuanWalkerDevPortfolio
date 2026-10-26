@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { site } from "@/content/site/site";
-import { FOCUS_ON_DARK, GUTTER } from "./styles";
+import { FOCUS_ON_DARK, GUTTER, OUTLINE_TO_PULSE } from "./styles";
 
 /**
  * Sticky site bar. Must render as a direct child of the page-level wrapper,
@@ -39,7 +39,7 @@ export function TopBar() {
           ))}
           <a
             href="#contact"
-            className={`inline-flex min-h-11 items-center rounded-lg bg-pulse px-[18px] font-semibold text-depth ${FOCUS_ON_DARK}`}
+            className={`inline-flex min-h-11 items-center rounded-lg px-[18px] font-semibold text-nav-link-on-dark ${OUTLINE_TO_PULSE} ${FOCUS_ON_DARK}`}
           >
             Contact
           </a>
