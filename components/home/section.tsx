@@ -28,12 +28,15 @@ export function SectionHeading({
   title,
   intro,
   onDark = false,
+  flush = false,
 }: {
   /** e.g. "02 · EXPERIENCE" */
   eyebrow: string;
   title: string;
   intro?: string;
   onDark?: boolean;
+  /** Drop the space under the heading, for side-by-side layouts. */
+  flush?: boolean;
 }) {
   return (
     <>
@@ -42,7 +45,7 @@ export function SectionHeading({
       </p>
       <h2
         className={`font-display text-[30px] leading-[1.15] font-semibold tracking-[-0.01em] sm:text-[38px] ${
-          intro ? "mb-3" : "mb-10"
+          flush ? "mb-0" : intro ? "mb-3" : "mb-10"
         }`}
       >
         {title}
