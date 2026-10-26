@@ -22,6 +22,14 @@ export interface ProjectFrontmatter {
   diagram?: string | null;
   featured: boolean;
   order?: number;
+  /** One-line summary for the homepage featured-work card. */
+  summary?: string;
+  /** "What it does" column on the featured-work card. */
+  what?: string;
+  /** "How it's built" column on the featured-work card. */
+  how?: string;
+  /** "Where it stands" column on the featured-work card. */
+  where?: string;
 }
 
 export interface Project extends ProjectFrontmatter {
