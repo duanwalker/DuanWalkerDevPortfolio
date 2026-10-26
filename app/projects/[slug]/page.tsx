@@ -55,16 +55,7 @@ export default async function ProjectPage({
         <StatusBadge status={project.status} />
         <h1 className="font-display text-h1 text-mist">{project.title}</h1>
         <p className="text-body-lg text-lilac">{project.tagline}</p>
-        {project.repo && (
-          <a
-            href={project.repo}
-            target="_blank"
-            rel="noreferrer"
-            className="w-fit font-mono text-mono text-pulse hover:underline"
-          >
-            View repo
-          </a>
-        )}
+        {/* project.repo stays in frontmatter but is intentionally not linked from the site. */}
       </header>
 
       <DefinitionBlock project={project}>

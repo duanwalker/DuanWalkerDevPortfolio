@@ -14,9 +14,9 @@ const SCALE = [
   { token: "text-h1", sizeClass: "text-h1", label: "H1", sample: "Design AI systems" },
   { token: "text-h2", sizeClass: "text-h2", label: "H2", sample: "Design AI systems" },
   { token: "text-h3", sizeClass: "text-h3", label: "H3", sample: "Design AI systems" },
-  { token: "text-body-lg", sizeClass: "text-body-lg", label: "Body Large", sample: "Senior Cloud Integrations Engineer at Microsoft." },
-  { token: "text-body", sizeClass: "text-body", label: "Body", sample: "Senior Cloud Integrations Engineer at Microsoft." },
-  { token: "text-small", sizeClass: "text-small", label: "Small", sample: "Senior Cloud Integrations Engineer at Microsoft." },
+  { token: "text-body-lg", sizeClass: "text-body-lg", label: "Body Large", sample: "Sr Azure Cloud Integrations Support Engineer at Microsoft." },
+  { token: "text-body", sizeClass: "text-body", label: "Body", sample: "Sr Azure Cloud Integrations Support Engineer at Microsoft." },
+  { token: "text-small", sizeClass: "text-small", label: "Small", sample: "Sr Azure Cloud Integrations Support Engineer at Microsoft." },
   { token: "text-mono", sizeClass: "text-mono", label: "Mono", sample: "stack: claude-api, azure-tables" },
 ] as const;
 
