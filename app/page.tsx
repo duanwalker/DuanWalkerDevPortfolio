@@ -1,13 +1,18 @@
 import { getRailProjects, getGridProjects } from "@/lib/projects";
 import { WorkflowRail } from "@/components/workflow-rail";
 import { ProjectCard } from "@/components/project-card";
+import { SideNav } from "@/components/home/side-nav";
+import { TopBar } from "@/components/home/top-bar";
 
 export default function Home() {
   const railProjects = getRailProjects();
   const gridProjects = getGridProjects();
 
   return (
-    <div className="mx-auto flex max-w-3xl flex-col gap-24 px-6 py-20">
+    <div className="page-timelines flex-1">
+    <SideNav />
+    <TopBar />
+    <div id="top" className="mx-auto flex max-w-3xl flex-col gap-24 px-6 py-20">
       <section className="flex flex-col gap-4">
         <p className="font-mono text-mono text-muted">Duan Walker</p>
         <h1 className="font-display text-display text-mist">
@@ -68,6 +73,7 @@ export default function Home() {
           </a>
         </div>
       </section>
+    </div>
     </div>
   );
 }
