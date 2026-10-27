@@ -1,73 +1,34 @@
-import { getRailProjects, getGridProjects } from "@/lib/projects";
-import { WorkflowRail } from "@/components/workflow-rail";
-import { ProjectCard } from "@/components/project-card";
+import { SideNav } from "@/components/home/side-nav";
+import { TopBar } from "@/components/home/top-bar";
+import { Hero } from "@/components/home/hero";
+import { About } from "@/components/home/about";
+import { Experience } from "@/components/home/experience";
+import { Skills } from "@/components/home/skills";
+import { FeaturedWork } from "@/components/home/featured-work";
+import { Writing } from "@/components/home/writing";
+import { Hackathons } from "@/components/home/hackathons";
+import { Credentials } from "@/components/home/credentials";
+import { Contact, HomeFooter } from "@/components/home/contact";
 
 export default function Home() {
-  const railProjects = getRailProjects();
-  const gridProjects = getGridProjects();
-
+  // page-timelines scopes the section view-timelines so the side nav (a sibling
+  // of the sections) can read them. TopBar must stay a direct child for sticky.
   return (
-    <div className="mx-auto flex max-w-3xl flex-col gap-24 px-6 py-20">
-      <section className="flex flex-col gap-4">
-        <p className="font-mono text-mono text-muted">Duan Walker</p>
-        <h1 className="font-display text-display text-mist">
-          I design AI systems that run on Azure.
-        </h1>
-        <p className="text-body-lg text-lilac">
-          Senior Cloud Integrations Engineer at Microsoft. Seven years building
-          orchestration, agent workflows, and integration architecture for enterprise
-          customers.
-        </p>
-      </section>
-
-      {railProjects.length > 0 && (
-        <section className="flex flex-col gap-8">
-          <h2 className="font-display text-h2 text-mist">Featured work</h2>
-          <WorkflowRail projects={railProjects} />
-        </section>
-      )}
-
-      {gridProjects.length > 0 && (
-        <section className="flex flex-col gap-8">
-          <h2 className="font-display text-h2 text-mist">More work</h2>
-          <div className="grid gap-6 sm:grid-cols-2">
-            {gridProjects.map((project) => (
-              <ProjectCard key={project.slug} project={project} />
-            ))}
-          </div>
-        </section>
-      )}
-
-      <section className="flex flex-col gap-4">
-        <h2 className="font-display text-h2 text-mist">About</h2>
-        <p className="text-body-lg text-lilac">
-          The pattern started early — as a kid I built a three-wheeled car by myself
-          with spare parts of old toys, and I&apos;ve been designing and assembling
-          systems end-to-end ever since. Seven years at Microsoft later, that means
-          orchestration, agent workflows, and integration architecture for enterprise
-          customers.
-        </p>
-      </section>
-
-      <section className="flex flex-col gap-4">
-        <h2 className="font-display text-h2 text-mist">Contact</h2>
-        <div className="flex flex-col gap-2">
-          <a
-            href="mailto:duan.walker.dev@gmail.com"
-            className="w-fit font-mono text-mono text-pulse hover:text-mist"
-          >
-            duan.walker.dev@gmail.com
-          </a>
-          <a
-            href="/resume/DuanWalkerResume.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-fit font-mono text-mono text-pulse hover:text-mist"
-          >
-            Resume (PDF)
-          </a>
-        </div>
-      </section>
+    <div className="page-timelines flex-1 bg-ground text-ink">
+      <SideNav />
+      <TopBar />
+      <main>
+        <Hero />
+        <About />
+        <Experience />
+        <Skills />
+        <FeaturedWork />
+        <Writing />
+        <Hackathons />
+        <Credentials />
+        <Contact />
+      </main>
+      <HomeFooter />
     </div>
   );
 }

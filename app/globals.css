@@ -11,6 +11,30 @@
   --color-pulse: #6ee0c8;
   --color-amber: #f2b95c;
 
+  /* Dark surfaces (hero, top bar, contact) */
+  --color-depth-card: #25214a;
+  --color-depth-border: #3b3568;
+  --color-border-on-dark: #4a4580;
+  --color-muted-on-dark: #c3bfe4;
+  --color-nav-link-on-dark: #d0ccee;
+  --color-text-on-dark: #f4f6fa;
+
+  /* Light surfaces (homepage sections). `body-copy` and `muted-on-light` avoid
+     clashing with the `text-body` size and the dark-theme `muted` color. */
+  --color-ink: #14181f;
+  --color-body-copy: #2b3340;
+  --color-muted-on-light: #4a5565;
+  --color-line: #dde1e8;
+  --color-ground: #f7f7f5;
+  --color-card: #ffffff;
+  --color-accent-on-light: #0c7a68;
+  --color-accent-on-light-hover: #085a4c;
+  --color-tint: #e2f5f0;
+
+  /* Layout */
+  --radius-card: 14px;
+  --container-content: 1200px;
+
   /* Fonts */
   --font-display: var(--font-sora);
   --font-body: var(--font-source-sans);
@@ -41,4 +65,198 @@
 
 body {
   font-family: var(--font-body);
+}
+
+/* Keep anchor targets clear of the sticky top bar, which wraps to more rows
+   on narrower screens. */
+html {
+  scroll-padding-top: 80px;
+}
+
+@media (max-width: 1023px) {
+  html {
+    scroll-padding-top: 140px;
+  }
+
+}
+
+@media (max-width: 639px) {
+  html {
+    scroll-padding-top: 190px;
+  }
+
+}
+
+/* Left-edge section dots (homepage, desktop only) */
+.sidenav {
+  position: fixed;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  z-index: 20;
+}
+
+.sidenav::before {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  background: rgb(107 114 133 / 0.45);
+}
+
+.sdot {
+  position: relative;
+  display: block;
+  width: 24px;
+  height: 24px;
+  margin-left: -6px;
+  border-radius: 50%;
+}
+
+.sdot::before {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 6px;
+  width: 12px;
+  height: 12px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  border: 2px solid #6b7285;
+  background: var(--color-ground);
+}
+
+.sdot:focus-visible {
+  outline: 2px solid var(--color-accent-on-light);
+  outline-offset: 0;
+}
+
+.slabel {
+  position: absolute;
+  left: 30px;
+  top: 2px;
+  white-space: nowrap;
+  font: 500 12px var(--font-mono);
+  background: var(--color-depth);
+  color: var(--color-text-on-dark);
+  padding: 4px 8px;
+  border-radius: 6px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sdot:hover .slabel,
+.sdot:focus-visible .slabel {
+  opacity: 1;
+}
+
+@media (max-width: 1279px) {
+  .sidenav {
+    display: none;
+  }
+
+}
+
+/* Scroll-driven motion. Progressive enhancement: without support, or with
+   reduced motion requested, everything renders statically and fully visible. */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  .slabel {
+    transition: opacity 0.15s;
+  }
+
+  @supports (animation-timeline: view()) {
+    .page-timelines {
+      timeline-scope: --s-hero, --s-about, --s-exp, --s-skills, --s-work, --s-writing,
+        --s-hack, --s-cred, --s-contact;
+    }
+
+    .tl-top { view-timeline-name: --s-hero; }
+    .tl-about { view-timeline-name: --s-about; }
+    .tl-experience { view-timeline-name: --s-exp; }
+    .tl-skills { view-timeline-name: --s-skills; }
+    .tl-work { view-timeline-name: --s-work; }
+    .tl-writing { view-timeline-name: --s-writing; }
+    .tl-hackathons { view-timeline-name: --s-hack; }
+    .tl-credentials { view-timeline-name: --s-cred; }
+    .tl-contact { view-timeline-name: --s-contact; }
+
+    /* Longhands rather than the `animation` shorthand, which would reset
+       animation-timeline back to auto. */
+    .reveal {
+      animation-name: rise;
+      animation-duration: auto;
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 45%;
+    }
+
+    .sdot::before {
+      animation-name: dotlit;
+      animation-duration: auto;
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+    }
+
+    .sdot-top::before { animation-timeline: --s-hero; }
+    .sdot-about::before { animation-timeline: --s-about; }
+    .sdot-experience::before { animation-timeline: --s-exp; }
+    .sdot-skills::before { animation-timeline: --s-skills; }
+    .sdot-work::before { animation-timeline: --s-work; }
+    .sdot-writing::before { animation-timeline: --s-writing; }
+    .sdot-hackathons::before { animation-timeline: --s-hack; }
+    .sdot-credentials::before { animation-timeline: --s-cred; }
+    .sdot-contact::before { animation-timeline: --s-contact; }
+
+    @keyframes rise {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
+      }
+
+    }
+
+    @keyframes dotlit {
+      0% {
+        background: var(--color-ground);
+        border-color: #6b7285;
+        transform: scale(1);
+      }
+
+      30% {
+        background: var(--color-pulse);
+        border-color: var(--color-depth);
+        transform: scale(1.35);
+      }
+
+      70% {
+        background: var(--color-pulse);
+        border-color: var(--color-depth);
+        transform: scale(1.35);
+      }
+
+      100% {
+        background: var(--color-ground);
+        border-color: #6b7285;
+        transform: scale(1);
+      }
+
+    }
+
+  }
+
 }
