@@ -1,5 +1,5 @@
-import Link from "next/link";
 import type { Project } from "@/lib/projects";
+import { NewTabLink } from "./new-tab-link";
 import { StatusBadge } from "./status-badge";
 import { TechChip } from "./tech-chip";
 
@@ -9,7 +9,7 @@ export function ProjectCard({ project }: { project: Project }) {
   const chips = [...project.stack, ...(project.integrations ?? [])].slice(0, MAX_CHIPS);
 
   return (
-    <Link
+    <NewTabLink
       href={`/projects/${project.slug}/`}
       className="group block rounded-xl border border-conduit bg-surface p-6 transition-colors hover:border-pulse"
     >
@@ -25,6 +25,6 @@ export function ProjectCard({ project }: { project: Project }) {
           ))}
         </div>
       )}
-    </Link>
+    </NewTabLink>
   );
 }
