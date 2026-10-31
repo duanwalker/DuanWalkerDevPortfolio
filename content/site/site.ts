@@ -1,3 +1,5 @@
+import { badges } from "./credentials";
+
 export interface NavSection {
   id: string;
   label: string;
@@ -67,7 +69,7 @@ export const site: SiteContent = {
       { value: "7 yrs", label: "Azure support at Microsoft, promoted to Senior in 2024" },
       { value: "3", label: "Logic Apps tutorials on Microsoft Community Hub" },
       { value: "4 of 5", label: "Recent years with a Microsoft hackathon entry" },
-      { value: "3", label: "Microsoft-issued badges earned" },
+      { value: String(badges.length), label: "Microsoft-issued badges earned" },
     ],
   },
   about: {
