@@ -75,7 +75,7 @@ export const site: SiteContent = {
   about: {
     heading: "Systems, built end to end.",
     paragraphs: [
-      "The pattern started early. As a kid I built a three-wheeled car by myself from the spare parts of old toys, and I’ve been designing and assembling systems end to end ever since.",
+      "The pattern started early. As a kid I built a battery-powered, three-wheeled car by myself from the spare parts of old toys, and I’ve been designing and assembling systems end to end ever since.",
       "Seven years supporting Azure at Microsoft, most of them on Logic Apps, have given me deep integration knowledge: how connectors, authentication, and storage behave in production, and where they break. Around that core I carry breadth across the platform, from compute and storage to the data and eventing layer, including Event Hubs, Data Factory, Data Lake, Synapse, and Databricks, so I can design the whole solution rather than just the workflow.",
     ],
     depth: {
@@ -87,11 +87,11 @@ export const site: SiteContent = {
       handsOn: ["Functions", "Storage", "SQL", "Key Vault", "AKS", "Azure OpenAI", "Copilot Studio"],
       architectureLevel: ["Event Hubs", "Data Factory", "Data Lake", "Synapse", "Databricks"],
     },
-    location: "Charlotte, NC · Remote-first",
+    location: "Charlotte, NC",
   },
   contact: {
     heading: "Let’s talk about AI on Azure.",
-    text: "Open to Cloud Solution Architect (AI) conversations, remote-first.",
+    text: "Open to Cloud Solution Architect (AI) conversations.",
   },
   copyright: "© 2026 Duan Walker",
 };
