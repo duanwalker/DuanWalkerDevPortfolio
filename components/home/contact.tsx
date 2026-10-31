@@ -1,3 +1,4 @@
+import { AutoLink, NewTabLink } from "@/components/new-tab-link";
 import { site } from "@/content/site/site";
 import { DocumentIcon, GitHubIcon, LinkedInIcon, MailIcon } from "./icons";
 import { Section, SectionHeading } from "./section";
@@ -27,16 +28,16 @@ export function Contact() {
       <ul className="flex min-w-0 flex-[1_1_300px] flex-col gap-3 text-[17px]">
         {links.map((link) => (
           <li key={link.href}>
-            <a href={link.href} className={LINK_OUTLINED}>
+            <AutoLink href={link.href} className={LINK_OUTLINED}>
               <span aria-hidden="true" className={`${ICON_CIRCLE} bg-pulse text-depth`}>
                 {link.icon}
               </span>
               <span className="min-w-0 [overflow-wrap:anywhere]">{link.label}</span>
-            </a>
+            </AutoLink>
           </li>
         ))}
         <li>
-          <a
+          <NewTabLink
             href={site.resumePath}
             className={`group ${LINK} text-text-on-dark ${OUTLINE_TO_PULSE} ${FOCUS_ON_DARK}`}
           >
@@ -47,7 +48,7 @@ export function Contact() {
               <DocumentIcon size={20} />
             </span>
             <span>Download resume (PDF)</span>
-          </a>
+          </NewTabLink>
         </li>
       </ul>
     </Section>

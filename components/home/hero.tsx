@@ -1,3 +1,4 @@
+import { NewTabLink } from "@/components/new-tab-link";
 import { site } from "@/content/site/site";
 import { DocumentIcon } from "./icons";
 import { EYEBROW, FOCUS_ON_DARK, GUTTER } from "./styles";
@@ -23,7 +24,7 @@ export function Hero() {
             >
               See featured work
             </a>
-            <a
+            <NewTabLink
               href={site.resumePath}
               className={`inline-flex min-h-11 items-center gap-3 rounded-lg border border-border-on-dark py-2.5 pr-6 pl-3 font-semibold text-text-on-dark transition-colors hover:border-pulse ${FOCUS_ON_DARK}`}
             >
@@ -34,7 +35,7 @@ export function Hero() {
                 <DocumentIcon size={18} />
               </span>
               <span>Resume (PDF)</span>
-            </a>
+            </NewTabLink>
           </div>
         </div>
 

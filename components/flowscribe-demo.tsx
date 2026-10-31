@@ -2,6 +2,7 @@ import type { MDXComponents } from "mdx/types";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import { getFlowScribeDemoFixture } from "@/lib/flowscribe-demo";
+import { AutoLink } from "./new-tab-link";
 
 /**
  * Demotes the fixture's own h1/h2/h3 to non-heading-level tags so the sample
@@ -17,12 +18,7 @@ const demoOutputComponents: MDXComponents = {
   li: (props) => <li {...props} />,
   strong: (props) => <strong className="font-semibold text-mist" {...props} />,
   a: (props) => (
-    <a
-      className="text-pulse underline underline-offset-2 hover:text-mist"
-      target="_blank"
-      rel="noreferrer"
-      {...props}
-    />
+    <AutoLink className="text-pulse underline underline-offset-2 hover:text-mist" {...props} />
   ),
   code: (props) => (
     <code className="rounded bg-depth px-1.5 py-0.5 font-mono text-mono text-mist" {...props} />

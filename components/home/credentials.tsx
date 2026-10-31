@@ -8,38 +8,45 @@ export function Credentials() {
     <Section id="credentials">
       <SectionHeading eyebrow="07 · CREDENTIALS" title="Badges, certifications, and learning" />
 
-      <div className="flex flex-wrap gap-5">
+      <ul className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
         {badges.map((badge) => (
-          <div
+          <li
             key={badge.title}
-            className={`flex min-w-0 flex-[1_1_240px] flex-col items-center gap-3.5 p-7 text-center ${CARD} ${CARD_HOVER}`}
+            className={`flex min-w-0 flex-col items-center gap-2.5 p-4 text-center sm:p-5 ${CARD} ${CARD_HOVER}`}
           >
-            <Image src={badge.src} alt={badge.alt} width={132} height={132} className="size-[132px]" />
-            <h3 className="text-[17px] font-semibold">{badge.title}</h3>
-            <p className="text-[15px] text-muted-on-light">{badge.issuer}</p>
-          </div>
+            {/* Fixed square box so the portrait hexagon and round badges read at the same size. */}
+            <Image
+              src={badge.src}
+              alt={badge.alt}
+              width={96}
+              height={96}
+              className="size-24 object-contain"
+            />
+            <h3 className="text-[15px] leading-snug font-semibold">{badge.title}</h3>
+            <p className="text-[13px] leading-[1.4] text-muted-on-light">{badge.issuer}</p>
+          </li>
         ))}
+      </ul>
 
-        <ul className="flex min-w-0 flex-[1_1_240px] flex-col gap-4">
-          {credentials.map((credential) => (
-            <li
-              key={credential.title}
-              className={`rounded-card border px-6 py-[22px] ${
-                credential.highlight ? "border-[#A6DCCF] bg-tint" : "border-line bg-card"
+      <ul className="mt-4 flex flex-wrap gap-4">
+        {credentials.map((credential) => (
+          <li
+            key={credential.title}
+            className={`min-w-0 flex-[1_1_240px] rounded-card border px-5 py-4 ${
+              credential.highlight ? "border-[#A6DCCF] bg-tint" : "border-line bg-card"
+            }`}
+          >
+            <h3 className="text-[16px] font-semibold">{credential.title}</h3>
+            <p
+              className={`mt-1 text-[14px] ${
+                credential.highlight ? "text-body-copy" : "text-muted-on-light"
               }`}
             >
-              <h3 className="text-[17px] font-semibold">{credential.title}</h3>
-              <p
-                className={`mt-1 text-[15px] ${
-                  credential.highlight ? "text-body-copy" : "text-muted-on-light"
-                }`}
-              >
-                {credential.detail}
-              </p>
-            </li>
-          ))}
-        </ul>
-      </div>
+              {credential.detail}
+            </p>
+          </li>
+        ))}
+      </ul>
     </Section>
   );
 }

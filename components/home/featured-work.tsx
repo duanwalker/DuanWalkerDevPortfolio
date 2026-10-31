@@ -1,7 +1,7 @@
-import Link from "next/link";
 import { getGridProjects, getRailProjects, type Project } from "@/lib/projects";
 import { ProjectCard } from "@/components/project-card";
 import { TechChip } from "@/components/tech-chip";
+import { NewTabLink } from "@/components/new-tab-link";
 import { StatusChip } from "./chip";
 import { ProjectToggleCard } from "./project-toggle-card";
 import { Section, SectionHeading } from "./section";
@@ -37,12 +37,12 @@ function ProjectDetails({ project }: { project: Project }) {
           ))}
         </div>
       )}
-      <Link
+      <NewTabLink
         href={`/projects/${project.slug}/`}
         className={`mt-[18px] inline-flex min-h-11 items-center rounded text-[16px] font-semibold text-accent-on-light hover:text-accent-on-light-hover ${FOCUS_ON_LIGHT}`}
       >
         View project page →
-      </Link>
+      </NewTabLink>
     </>
   );
 }

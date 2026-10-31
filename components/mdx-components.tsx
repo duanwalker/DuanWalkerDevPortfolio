@@ -1,5 +1,6 @@
 import type { MDXComponents } from "mdx/types";
 import { FlowScribeDemo } from "./flowscribe-demo";
+import { AutoLink } from "./new-tab-link";
 
 export const mdxComponents: MDXComponents = {
   FlowScribeDemo,
@@ -15,7 +16,7 @@ export const mdxComponents: MDXComponents = {
   li: (props) => <li {...props} />,
   strong: (props) => <strong className="font-semibold text-mist" {...props} />,
   a: (props) => (
-    <a className="text-pulse underline underline-offset-2 hover:text-mist" {...props} />
+    <AutoLink className="text-pulse underline underline-offset-2 hover:text-mist" {...props} />
   ),
   code: (props) => (
     <code className="rounded bg-depth px-1.5 py-0.5 font-mono text-mono text-mist" {...props} />

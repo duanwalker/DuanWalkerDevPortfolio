@@ -3,9 +3,6 @@ export interface Badge {
   issuer: string;
   src: string;
   alt: string;
-  /** Intrinsic pixel size of the image file. */
-  width: number;
-  height: number;
 }
 
 export interface Credential {
@@ -21,24 +18,36 @@ export const badges: Badge[] = [
     issuer: "Microsoft Digital",
     src: "/images/badges/copilot-agent-maker-badge.png",
     alt: "Microsoft Digital Copilot Agent Maker badge",
-    width: 240,
-    height: 240,
+  },
+  {
+    title: "AI Fluency Achievement",
+    issuer: "Microsoft SkillUp AI",
+    src: "/images/badges/skillup-ai-fluency-badge.png",
+    alt: "Microsoft SkillUp AI Fluency Achievement badge, The Garage",
   },
   {
     title: "Support Specialist",
     issuer: "Azure App Service Configuration and Management",
     src: "/images/badges/support-specialist-badge.png",
     alt: "Microsoft Customer Service and Support, Support Specialist badge for Azure App Service Configuration and Management",
-    width: 204,
-    height: 204,
+  },
+  {
+    title: "Kepner Tregoe Practitioner",
+    issuer: "Microsoft Customer Service & Support",
+    src: "/images/badges/kepner-tregoe-practitioner-badge.png",
+    alt: "Microsoft Customer Service and Support, Kepner Tregoe Practitioner badge",
+  },
+  {
+    title: "Active Contributor",
+    issuer: "MCAPS Contributor Program",
+    src: "/images/badges/active-contributor-badge.png",
+    alt: "Active Contributor, MCAPS Contributor Program badge",
   },
   {
     title: "Hackathon 2023",
     issuer: "Participant",
     src: "/images/badges/hackathon-2023-badge.png",
     alt: "Microsoft Hackathon 2023 Participant badge",
-    width: 240,
-    height: 240,
   },
 ];
 

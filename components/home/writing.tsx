@@ -1,3 +1,4 @@
+import { NewTabLink } from "@/components/new-tab-link";
 import { articles } from "@/content/site/writing";
 import { Section, SectionHeading } from "./section";
 import { CARD, CARD_HOVER, FOCUS_ON_LIGHT } from "./styles";
@@ -14,7 +15,7 @@ export function Writing() {
       <ul className="flex flex-wrap gap-5">
         {articles.map((article) => (
           <li key={article.url} className="flex min-w-0 flex-[1_1_340px]">
-            <a
+            <NewTabLink
               href={article.url}
               className={`flex w-full flex-col gap-3 p-6 text-ink sm:p-7 ${CARD} ${CARD_HOVER} ${FOCUS_ON_LIGHT}`}
             >
@@ -29,7 +30,7 @@ export function Writing() {
               <span className="mt-auto text-[15px] font-semibold text-accent-on-light">
                 Read the article →
               </span>
-            </a>
+            </NewTabLink>
           </li>
         ))}
       </ul>
