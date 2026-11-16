@@ -1,0 +1,48 @@
+---
+slug: palettera
+title: Palettera
+tagline: A demo storefront where an Azure AI agent drafts replies to negative reviews and the owner approves them before they publish.
+status: active
+year: 2026
+role: Sole architect and engineer
+stack: [logic-apps, azure-functions, azure-tables, azure-static-web-apps, azure-openai, key-vault, bicep]
+integrations: [cloudflare-turnstile, outlook]
+repo: null
+demo: null
+thumbnail: null
+diagram: null
+featured: false
+order: 5
+summary: "An Azure AI agent workflow that drafts replies to negative reviews, with owner approval before anything publishes."
+what: "One- and two-star reviews on a fictional art-supplies shop trigger an AI agent that drafts an empathetic reply. The owner approves or rejects it on a protected admin page, and approved replies appear under the review labeled AI-generated."
+how: "Azure Static Web Apps with a managed Functions API, Azure Table Storage, Key Vault, and a Logic Apps (Consumption) autonomous agent workflow that emails the owner through Outlook, all provisioned with Bicep."
+where: "A portfolio demo built around a fictional shop."
+---
+
+## Problem
+
+Palettera is a fictional art-supplies shop, built as a portfolio demo of an Azure AI agent workflow. The scenario it models: a one- or two-star review deserves a careful, empathetic reply, and writing one takes time. An AI agent can draft that reply, but anything posted under a business's name should not go out without the owner seeing it first.
+
+## Constraints
+
+Every AI-drafted reply has to clear an owner approval step before it appears on the site, and every published reply has to be labeled AI-generated. A public review form that triggers model calls is an abuse target, so the site needs a bot check, rate limits, and a hard daily cap on agent calls. Review text comes from anonymous visitors and has to be treated as untrusted the whole way through — into the model and back out onto the page. And the demo has to run with its cost bounded from the first deployment.
+
+## Architecture
+
+Azure Static Web Apps on the Free tier hosts the storefront, with a managed Functions API behind it. Azure Table Storage holds reviews, replies, counters, and an audit log; Key Vault holds secrets. A one- or two-star review triggers a Logic Apps (Consumption) autonomous agent workflow with no tools, which drafts a reply with Azure OpenAI, sends the draft back to the site, and emails the owner through Outlook. The owner signs in with GitHub on an admin page gated by an admin role and approves or rejects the draft. Approved replies render under the review with an AI-generated label.
+
+Abuse controls sit in front of all of it: a Cloudflare Turnstile bot check on the review form, per-visitor and site-wide rate limits keyed on salted daily IP hashes, a daily cap on agent calls, output encoding and a Content Security Policy on everything rendered, and a shared secret authenticating calls between the workflow and the site. Everything is provisioned with Bicep, with a budget alert created before any other resource.
+
+## Decisions and tradeoffs
+
+Table Storage over the Azure SQL free offer, because the free SQL tier auto-pauses and the first request after a pause pays a cold start; Table Storage has neither. Table Storage also over sharing another project's database, so the demo stays isolated from everything else I run.
+
+The agent has no tools, and review text is treated as untrusted data rather than instructions. That is the prompt-injection mitigation: with nothing to call, the worst a hostile review can do is produce a bad draft, and that draft still has to get past the owner.
+
+Approval is a status change on the site, not a step the workflow waits on. The workflow drafts, hands off, and finishes, so no run sits open for however long the owner takes to respond, and the approval state lives where the admin page can read it.
+
+A Logic Apps agent workflow over calling the Claude API directly, because it matches the integration architecture work I do. The point of the demo is the pattern I would put in front of a customer, not the shortest path to a generated reply.
+
+## What I'd do differently
+
+For production, move to the Standard tier with VNet integration, private endpoints, and API Management in front of the API. Fetch the shared secret from Key Vault with a managed identity instead of passing it as a workflow parameter; Free tier Static Web Apps has no managed identity, which is what forced the parameter. Author the agent workflow in Bicep once that is supported, instead of building it by hand in the portal, so the whole deployment lives in source. And add Application Insights and alerting from day one rather than after the fact.
