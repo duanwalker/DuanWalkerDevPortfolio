@@ -20,9 +20,9 @@ export default function Home() {
       <main>
         <Hero />
         <About />
+        <FeaturedWork />
         <Experience />
         <Skills />
-        <FeaturedWork />
         <Writing />
         <Hackathons />
         <Credentials />

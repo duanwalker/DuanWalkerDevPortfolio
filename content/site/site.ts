@@ -54,9 +54,9 @@ export const site: SiteContent = {
   avatar: { src: "/images/avatar.jpg", alt: "Cartoon portrait of Duan Walker" },
   nav: [
     { id: "about", label: "About" },
+    { id: "work", label: "Work" },
     { id: "experience", label: "Experience" },
     { id: "skills", label: "Skills" },
-    { id: "work", label: "Work" },
     { id: "writing", label: "Writing" },
     { id: "hackathons", label: "Hackathons" },
     { id: "credentials", label: "Credentials" },

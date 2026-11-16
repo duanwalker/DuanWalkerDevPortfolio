@@ -15,6 +15,12 @@ const TECH_LABELS: Record<string, string> = {
   "logic-apps": "Logic Apps",
   csharp: "C#",
   "razor-pages": "Razor Pages",
+  "azure-static-web-apps": "Azure Static Web Apps",
+  "azure-openai": "Azure OpenAI",
+  "key-vault": "Key Vault",
+  bicep: "Bicep",
+  "cloudflare-turnstile": "Cloudflare Turnstile",
+  outlook: "Outlook",
 };
 
 export function techLabel(key: string): string {

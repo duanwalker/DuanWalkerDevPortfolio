@@ -1,4 +1,4 @@
-import { getGridProjects, getRailProjects, type Project } from "@/lib/projects";
+import { getGridProjects, getLiveDemoUrl, getRailProjects, type Project } from "@/lib/projects";
 import { ProjectCard } from "@/components/project-card";
 import { TechChip } from "@/components/tech-chip";
 import { NewTabLink } from "@/components/new-tab-link";
@@ -15,6 +15,7 @@ const DETAIL_COLUMNS = [
 
 function ProjectDetails({ project }: { project: Project }) {
   const chips = [...project.stack, ...(project.integrations ?? [])];
+  const demoUrl = getLiveDemoUrl(project);
 
   return (
     <>
@@ -37,12 +38,22 @@ function ProjectDetails({ project }: { project: Project }) {
           ))}
         </div>
       )}
-      <NewTabLink
-        href={`/projects/${project.slug}/`}
-        className={`mt-[18px] inline-flex min-h-11 items-center rounded text-[16px] font-semibold text-accent-on-light hover:text-accent-on-light-hover ${FOCUS_ON_LIGHT}`}
-      >
-        View project page →
-      </NewTabLink>
+      <div className="mt-[18px] flex flex-wrap items-center gap-x-6 gap-y-3">
+        {demoUrl && (
+          <NewTabLink
+            href={demoUrl}
+            className={`inline-flex min-h-11 items-center rounded-lg bg-pulse px-5 py-2.5 text-[16px] font-semibold text-depth ${FOCUS_ON_LIGHT}`}
+          >
+            Try the live demo →
+          </NewTabLink>
+        )}
+        <NewTabLink
+          href={`/projects/${project.slug}/`}
+          className={`inline-flex min-h-11 items-center rounded text-[16px] font-semibold text-accent-on-light hover:text-accent-on-light-hover ${FOCUS_ON_LIGHT}`}
+        >
+          View project page →
+        </NewTabLink>
+      </div>
     </>
   );
 }
@@ -54,7 +65,7 @@ export function FeaturedWork() {
   return (
     <Section id="work">
       <SectionHeading
-        eyebrow="04 · FEATURED WORK"
+        eyebrow="02 · FEATURED WORK"
         title="Things I’ve built"
         intro="Select a project to open its details, or go to its project page."
       />
