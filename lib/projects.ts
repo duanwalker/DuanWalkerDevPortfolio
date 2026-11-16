@@ -65,6 +65,11 @@ export function getGridProjects(): Project[] {
   return getPublishedProjects().slice(RAIL_CAP);
 }
 
+/** The project's external live demo URL, or null. Internal anchors like /projects/flowscribe#demo don't count. */
+export function getLiveDemoUrl(project: Project): string | null {
+  return project.demo?.startsWith("https://") ? project.demo : null;
+}
+
 export function getProjectBySlug(slug: string): Project | undefined {
   return getPublishedProjects().find((project) => project.slug === slug);
 }

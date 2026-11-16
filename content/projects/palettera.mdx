@@ -5,14 +5,14 @@ tagline: A demo storefront where an Azure AI agent drafts replies to negative re
 status: active
 year: 2026
 role: Sole architect and engineer
-stack: [logic-apps, azure-functions, azure-tables, azure-static-web-apps, azure-openai, key-vault, bicep]
+stack: [logic-apps, azure-tables, azure-static-web-apps, azure-openai, key-vault, bicep]
 integrations: [cloudflare-turnstile, outlook]
 repo: null
-demo: null
+demo: https://purple-water-07842040f.8.azurestaticapps.net/
 thumbnail: null
 diagram: null
-featured: false
-order: 5
+featured: true
+order: 0
 summary: "An Azure AI agent workflow that drafts replies to negative reviews, with owner approval before anything publishes."
 what: "One- and two-star reviews on a fictional art-supplies shop trigger an AI agent that drafts an empathetic reply. The owner approves or rejects it on a protected admin page, and approved replies appear under the review labeled AI-generated."
 how: "Azure Static Web Apps with a managed Functions API, Azure Table Storage, Key Vault, and a Logic Apps (Consumption) autonomous agent workflow that emails the owner through Outlook, all provisioned with Bicep."
