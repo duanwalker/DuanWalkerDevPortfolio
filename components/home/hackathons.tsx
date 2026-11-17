@@ -9,8 +9,8 @@ export function Hackathons() {
   return (
     <Section id="hackathons">
       <SectionHeading
-        eyebrow="06 · HACKATHONS"
-        title="I like building under a deadline"
+        eyebrow="07 · HACKATHONS"
+        title="I also love a good Hackathon challenge..."
         intro="Microsoft’s company-wide hackathon has been a yearly outlet for the tooling and agents I wished existed on the support floor."
       />
 

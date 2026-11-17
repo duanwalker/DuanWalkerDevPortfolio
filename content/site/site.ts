@@ -55,11 +55,11 @@ export const site: SiteContent = {
   nav: [
     { id: "about", label: "About" },
     { id: "work", label: "Work" },
-    { id: "experience", label: "Experience" },
     { id: "skills", label: "Skills" },
+    { id: "experience", label: "Experience" },
     { id: "writing", label: "Writing" },
-    { id: "hackathons", label: "Hackathons" },
     { id: "credentials", label: "Credentials" },
+    { id: "hackathons", label: "Hackathons" },
   ],
   hero: {
     eyebrow: "SR AZURE CLOUD INTEGRATIONS SUPPORT ENGINEER · MICROSOFT",

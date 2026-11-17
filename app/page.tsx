@@ -21,11 +21,11 @@ export default function Home() {
         <Hero />
         <About />
         <FeaturedWork />
-        <Experience />
         <Skills />
+        <Experience />
         <Writing />
-        <Hackathons />
         <Credentials />
+        <Hackathons />
         <Contact />
       </main>
       <HomeFooter />
