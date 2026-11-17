@@ -30,6 +30,10 @@ export interface ProjectFrontmatter {
   how?: string;
   /** "Where it stands" column on the featured-work card. */
   where?: string;
+  /** Path to a small logo shown beside the title on the featured-work card. */
+  logo?: string;
+  /** Alt text for `logo`. Use "" when the logo is decorative. */
+  logoAlt?: string;
 }
 
 export interface Project extends ProjectFrontmatter {

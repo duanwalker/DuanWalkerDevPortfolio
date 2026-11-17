@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { getGridProjects, getLiveDemoUrl, getRailProjects, type Project } from "@/lib/projects";
 import { ProjectCard } from "@/components/project-card";
 import { TechChip } from "@/components/tech-chip";
@@ -75,6 +76,19 @@ export function FeaturedWork() {
           <li key={project.slug}>
             <ProjectToggleCard
               defaultOpen={index === 0}
+              logo={
+                project.logo ? (
+                  <span className="flex size-12 shrink-0 items-center justify-center rounded-[14px] border border-line bg-white p-2 sm:size-16">
+                    <Image
+                      src={project.logo}
+                      alt={project.logoAlt ?? ""}
+                      width={64}
+                      height={64}
+                      className="size-full object-contain"
+                    />
+                  </span>
+                ) : undefined
+              }
               header={
                 <>
                   <StatusChip status={project.status} />

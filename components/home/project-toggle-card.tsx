@@ -10,10 +10,13 @@ import { CARD, CARD_HOVER } from "./styles";
  */
 export function ProjectToggleCard({
   header,
+  logo,
   defaultOpen = false,
   children,
 }: {
   header: React.ReactNode;
+  /** Optional logo tile rendered to the left of the header text. */
+  logo?: React.ReactNode;
   defaultOpen?: boolean;
   children: React.ReactNode;
 }) {
@@ -32,7 +35,10 @@ export function ProjectToggleCard({
         onClick={() => setOpen((value) => !value)}
         className="flex w-full cursor-pointer flex-wrap items-center justify-between gap-4 rounded-card px-5 py-[26px] text-left focus-visible:outline-3 focus-visible:-outline-offset-3 focus-visible:outline-accent-on-light sm:px-7"
       >
-        <span className="flex min-w-0 flex-[1_1_420px] flex-col gap-2.5">{header}</span>
+        <span className="flex min-w-0 flex-[1_1_420px] items-start gap-4">
+          {logo}
+          <span className="flex min-w-0 flex-1 flex-col gap-2.5">{header}</span>
+        </span>
         <span className="flex min-h-11 items-center gap-2.5 text-[15px] text-muted-on-light">
           <span>{open ? "Hide details" : "Show details"}</span>
           <ChevronDownIcon
