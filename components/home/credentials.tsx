@@ -6,7 +6,7 @@ import { CARD, CARD_HOVER } from "./styles";
 export function Credentials() {
   return (
     <Section id="credentials">
-      <SectionHeading eyebrow="07 · CREDENTIALS" title="Badges, certifications, and learning" />
+      <SectionHeading eyebrow="06 · CREDENTIALS" title="Badges, certifications, and learning" />
 
       <ul className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
         {badges.map((badge) => (

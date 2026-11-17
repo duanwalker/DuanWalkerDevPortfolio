@@ -7,7 +7,7 @@ import { CARD } from "./styles";
 export function Skills() {
   return (
     <Section id="skills">
-      <SectionHeading eyebrow="04 · SKILLS" title="What I work with" />
+      <SectionHeading eyebrow="03 · SKILLS" title="What I work with" />
 
       <div className="flex flex-wrap gap-5">
         {skillGroups.map((group, index) => {

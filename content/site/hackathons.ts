@@ -10,8 +10,14 @@ export interface HackathonEntry {
 export const hackathonEntries: HackathonEntry[] = [
   {
     year: "2025",
-    title: "FlowScribe.AI and a support automation agent",
-    text: "Two entries: an AI documentation generator for Azure Logic Apps, and an internal agent that automates a support recovery workflow.",
+    title: "FlowScribe.AI",
+    text: "An AI documentation generator for Azure Logic Apps.",
+    visible: true,
+  },
+  {
+    year: "2025",
+    title: "Support automation agent",
+    text: "An internal agent that automates a support recovery workflow.",
     visible: true,
   },
   {

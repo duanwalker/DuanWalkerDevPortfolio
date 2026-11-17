@@ -5,7 +5,7 @@ import { CARD, CARD_HOVER } from "./styles";
 export function Experience() {
   return (
     <Section id="experience">
-      <SectionHeading eyebrow="03 · EXPERIENCE" title="Where I’ve worked" />
+      <SectionHeading eyebrow="04 · EXPERIENCE" title="Where I’ve worked" />
 
       <ol className="flex flex-col gap-5">
         {jobs.map((job) => (
